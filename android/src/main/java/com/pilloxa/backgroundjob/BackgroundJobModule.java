@@ -1,6 +1,8 @@
 package com.pilloxa.backgroundjob;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -137,6 +139,14 @@ class BackgroundJobModule extends ReactContextBaseJavaModule {
       callback.invoke(true);
     }
   }
+
+  @ReactMethod public void startApp(String packageName,Callback callback){
+    PackageManager pm = getReactApplicationContext().getPackageManager();
+    Intent launchIntent = pm.getLaunchIntentForPackage(packageName);
+    getReactApplicationContext().startActivity(launchIntent);
+    callback.invoke(true);
+  }
+  
   @Override public String getName() {
     return "BackgroundJob";
   }

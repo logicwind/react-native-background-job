@@ -199,6 +199,22 @@ const BackgroundJob = {
         callback("error", null);
       }
     });
+  },
+  /**
+   * Starts App
+   *
+   * @param {Callback} callback gets called with according parameters after result is received from Android module.
+   * @example
+   * import BackgroundJob from 'react-native-background-job';
+   *
+   * BackgroundJob.startApp((error,ignoringOptimization)=>{});
+   */
+  startApp: function(packageName, callback) {
+    jobModule.startApp(packageName,(result)=>{
+      if(result){
+        callback()
+      }
+    })
   }
 };
 if (Platform.OS == "ios") {
